@@ -14,9 +14,19 @@ namespace UI
             ViewModel = new TimerViewModel();
         }
 
+        protected override void ComposeObservable()
+        {
+            this.WhenAnyObservable(x => x.ViewModel.GetTimerCommand)
+                .Subscribe(_ => PresentViewControllerAsModalWindow(new TimerModal(Handle)))
+                .DisposeWith(Bindings);
+        }
+
         protected override void BindControls()
         {
             this.OneWayBind(ViewModel, vm => vm.Timer, controller => controller.TimerLabel.StringValue)
+                .DisposeWith(Bindings);
+            
+            this.BindCommand(ViewModel, vm => vm.GetTimerCommand, controller => controller.TimerButton)
                 .DisposeWith(Bindings);
         }
     }

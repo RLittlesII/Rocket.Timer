@@ -87,12 +87,15 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="TimerViewModel.cs" />
+    <Compile Include="ReactivePopover.cs" />
+    <Compile Include="Timer\TimerModal.cs" />
+    <Compile Include="Timer\TimerViewModel.cs" />
     <Compile Include="ViewController.cs" />
     <Compile Include="ViewController.designer.cs">
       <DependentUpon>ViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewControllerBase.cs" />
+    <Compile Include="ViewModelBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />

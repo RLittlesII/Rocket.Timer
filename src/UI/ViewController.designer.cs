@@ -13,10 +13,18 @@ namespace UI
 	partial class ViewController
 	{
 		[Outlet]
+		AppKit.NSButton TimerButton { get; set; }
+
+		[Outlet]
 		AppKit.NSTextField TimerLabel { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (TimerButton != null) {
+				TimerButton.Dispose ();
+				TimerButton = null;
+			}
+
 			if (TimerLabel != null) {
 				TimerLabel.Dispose ();
 				TimerLabel = null;
