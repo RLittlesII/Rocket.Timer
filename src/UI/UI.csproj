@@ -44,6 +44,10 @@
     <LinkMode>SdkOnly</LinkMode>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ReactiveUI.Events, Version=9.16.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\packages\ReactiveUI.Events.9.16.6\lib\xamarinmac20\ReactiveUI.Events.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.Mac" />
@@ -89,6 +93,7 @@
     <Compile Include="AppDelegate.cs" />
     <Compile Include="ReactivePopover.cs" />
     <Compile Include="Timer\TimerModal.cs" />
+    <Compile Include="Timer\TimerModalViewModel.cs" />
     <Compile Include="Timer\TimerViewModel.cs" />
     <Compile Include="ViewController.cs" />
     <Compile Include="ViewController.designer.cs">
@@ -96,6 +101,10 @@
     </Compile>
     <Compile Include="ViewControllerBase.cs" />
     <Compile Include="ViewModelBase.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="Timer\TimerModal.designer.cs">
+      <DependentUpon>TimerModal.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />

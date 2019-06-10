@@ -5,6 +5,7 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Windows.Input;
 using ReactiveUI;
+using Splat;
 
 namespace UI
 {
@@ -19,9 +20,9 @@ namespace UI
         }
 
         public TimeSpan Timer => _timer.Value;
-        
+
         public ReactiveCommand<Unit, Unit> GetTimerCommand { get; private set; }
-        
+
         protected override void ComposeObservables()
         {
             _timer =
@@ -31,7 +32,10 @@ namespace UI
                     .ToProperty(this, x => x.Timer, TimeSpan.Zero)
                     .DisposeWith(ViewModelRegistrations);
 
-            GetTimerCommand = ReactiveCommand.Create(() => { });
+            GetTimerCommand = ReactiveCommand.Create(() =>
+            {
+                this.Log().Debug($"Execute {nameof(GetTimerCommand)}");
+            });
         }
     }
 }

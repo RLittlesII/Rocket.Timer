@@ -1,9 +1,10 @@
 using System.Reactive.Disposables;
 using ReactiveUI;
+using Splat;
 
 namespace UI
 {
-    public abstract class ViewModelBase : ReactiveObject
+    public abstract class ViewModelBase : ReactiveObject, IEnableLogger
     {
         protected ViewModelBase()
         {

@@ -1,9 +1,13 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
+using AppKit;
 using Foundation;
 using ReactiveUI;
+using PropertyChangingEventArgs = ReactiveUI.PropertyChangingEventArgs;
+using PropertyChangingEventHandler = ReactiveUI.PropertyChangingEventHandler;
 
 namespace UI
 {
@@ -11,7 +15,7 @@ namespace UI
         where T : class
     {
         protected CompositeDisposable Bindings { get; } = new CompositeDisposable();
-        
+
         protected ViewControllerBase(IntPtr intPtr)
             : base(intPtr)
         {

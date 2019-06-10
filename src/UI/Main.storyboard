@@ -692,6 +692,9 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <segue destination="xne-nD-srZ" kind="modal" identifier="TimerModalSegue" id="TLY-ga-MTI"/>
+                                </connections>
                             </button>
                         </subviews>
                     </view>
@@ -703,6 +706,42 @@
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="655"/>
+        </scene>
+        <!--Timer Modal-->
+        <scene sceneID="AyJ-QY-vYd">
+            <objects>
+                <viewController id="xne-nD-srZ" customClass="TimerModal" sceneMemberID="viewController">
+                    <view key="view" id="mqc-qi-9yP">
+                        <rect key="frame" x="0.0" y="0.0" width="379" height="101"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0xN-qz-t21">
+                                <rect key="frame" x="149" y="42" width="109" height="17"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="TimerModalLabel" id="FC1-po-GnJ">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Js6-dN-whe">
+                                <rect key="frame" x="14" y="13" width="81" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="XXu-QZ-0Yo">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="DIsmissButton" destination="Js6-dN-whe" id="RKO-Ay-ubU"/>
+                        <outlet property="DismissButton" destination="Js6-dN-whe" id="gHh-1O-YJx"/>
+                    </connections>
+                </viewController>
+                <customObject id="dc6-Ll-TLJ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="75.5" y="1024.5"/>
         </scene>
     </scenes>
 </document>
