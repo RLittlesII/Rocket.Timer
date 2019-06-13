@@ -10,12 +10,12 @@ using static AppKit.NSApplication;
 
 namespace UI
 {
-    public partial class ViewController : ViewControllerBase<TimerViewModel>
+    public partial class ViewController : ViewControllerBase<MainViewModel>
     {
         public ViewController(IntPtr handle)
             : base(handle)
         {
-            ViewModel = new TimerViewModel();
+            ViewModel = new MainViewModel();
         }
 
         public override void PrepareForSegue(NSStoryboardSegue segue, NSObject sender)
@@ -27,30 +27,27 @@ namespace UI
             {
                 case "TimerModalSegue":
                     var dialog = segue.DestinationController as TimerModal;
-                    dialog.DialogAccepted += (s, e) =>
-                    {
-                        Console.WriteLine("Dialog accepted");
-                        DismissViewController(dialog);
-                    };
                     dialog.Presenter = this;
+                    dialog.ViewModel.TimerValue = this.ViewModel.TimerValue;
                     break;
             }
         }
         protected override void ComposeObservable()
         {
-            this.WhenAnyObservable(x => x.ViewModel.GetTimerCommand)
+            this.WhenAnyObservable(x => x.ViewModel.StartTimerCommand)
                 .Do(_ => this.Log().Debug(Constants.TimerModalSegue))
-                .ObserveOn(RxApp.MainThreadScheduler)
                 .Subscribe(_ => PerformSegue(Constants.TimerModalSegue, this))
                 .DisposeWith(Bindings);
         }
 
         protected override void BindControls()
         {
-            this.OneWayBind(ViewModel, vm => vm.Timer, controller => controller.TimerLabel.StringValue)
+            this.WhenAnyValue(x => x.TimeEntryField.StringValue)
+                .Throttle(TimeSpan.FromSeconds(.35))
+                .Subscribe(x => ViewModel.TimerValue = x)
                 .DisposeWith(Bindings);
 
-            this.BindCommand(ViewModel, vm => vm.GetTimerCommand, controller => controller.TimerButton)
+            this.BindCommand(ViewModel, vm => vm.StartTimerCommand, controller => controller.TimerButton)
                 .DisposeWith(Bindings);
         }
     }

@@ -696,9 +696,20 @@
                                     <segue destination="xne-nD-srZ" kind="modal" identifier="TimerModalSegue" id="TLY-ga-MTI"/>
                                 </connections>
                             </button>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lNa-Qz-xPb">
+                                <rect key="frame" x="192" y="213" width="96" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="EMR-sG-0I7">
+                                    <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="Ll6-xZ-k34"/>
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                     </view>
                     <connections>
+                        <outlet property="TimeEntryField" destination="lNa-Qz-xPb" id="XMG-eZ-Cxb"/>
                         <outlet property="TimerButton" destination="rdy-CQ-HoL" id="376-VH-3ae"/>
                         <outlet property="TimerLabel" destination="WoD-Em-YYO" id="eLH-Rd-guq"/>
                     </connections>
@@ -735,8 +746,8 @@
                         </subviews>
                     </view>
                     <connections>
-                        <outlet property="DIsmissButton" destination="Js6-dN-whe" id="RKO-Ay-ubU"/>
                         <outlet property="DismissButton" destination="Js6-dN-whe" id="gHh-1O-YJx"/>
+                        <outlet property="TimerLabel" destination="0xN-qz-t21" id="bGv-Br-K4m"/>
                     </connections>
                 </viewController>
                 <customObject id="dc6-Ll-TLJ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

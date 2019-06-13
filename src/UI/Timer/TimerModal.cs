@@ -5,7 +5,6 @@ using ReactiveUI;
 
 namespace UI
 {
-    [Register("TimerModal")]
     public partial class TimerModal : ViewControllerBase<TimerModalViewModel>
     {
         public TimerModal(IntPtr intPtr)
@@ -28,6 +27,9 @@ namespace UI
 
         protected override void BindControls()
         {
+            this.OneWayBind(ViewModel, vm => vm.Timer, view => view.TimerLabel.StringValue)
+                .DisposeWith(Bindings);
+
             this.BindCommand(ViewModel, vm => vm.Dismiss, modal => modal.DismissButton)
                 .DisposeWith(Bindings);
         }

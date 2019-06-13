@@ -12,7 +12,7 @@ namespace UI
     public class TimerViewModel : ViewModelBase
     {
         private ObservableAsPropertyHelper<TimeSpan> _timer;
-        private IScheduler _mainScheduler;
+        private readonly IScheduler _mainScheduler;
 
         public TimerViewModel(IScheduler scheduler = null)
         {
@@ -27,7 +27,7 @@ namespace UI
         {
             _timer =
                 Observable
-                    .Interval(TimeSpan.FromSeconds(1), RxApp.MainThreadScheduler)
+                    .Interval(TimeSpan.FromSeconds(1), _mainScheduler)
                     .Select(x => TimeSpan.FromSeconds(x))
                     .ToProperty(this, x => x.Timer, TimeSpan.Zero)
                     .DisposeWith(ViewModelRegistrations);

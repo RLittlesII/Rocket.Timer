@@ -91,6 +91,7 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="MainViewModel.cs" />
     <Compile Include="ReactivePopover.cs" />
     <Compile Include="Timer\TimerModal.cs" />
     <Compile Include="Timer\TimerModalViewModel.cs" />
