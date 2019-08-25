@@ -16,6 +16,7 @@ namespace UI
 
         public ViewController Presenter { get; set; }
 
+        /// <inheritdoc/>
         protected override void ComposeObservables()
         {
             this.WhenAnyObservable(x => x.ViewModel.Dismiss)
@@ -26,6 +27,7 @@ namespace UI
                 .DisposeWith(Bindings);
         }
 
+        /// <inheritdoc/>
         protected override void BindControls()
         {
             this.OneWayBind(ViewModel, vm => vm.Id, modal => modal.Title)

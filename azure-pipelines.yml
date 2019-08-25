@@ -1,0 +1,76 @@
+trigger:
+  branches:
+    include:
+      - master
+      - feature/*
+      - release/*
+      - refs/tags/*
+pr:
+  autoCancel: true
+  branches:
+    include:
+      - master
+
+resources:
+  repositories:
+    - repository: rsg
+      type: github
+      name: RocketSurgeonsGuild/AzureDevopsTemplates
+      ref: refs/tags/v0.7.12
+      endpoint: github
+
+variables:
+  - group: rsg-bot
+  - name: CONFIGURATION
+    value: Release
+  - name: VERBOSITY
+    value: Normal
+  - name: COVERAGE
+    value: "$(Agent.BuildDirectory)/c"
+  - name: ARTIFACTS
+    value: $(Build.ArtifactStagingDirectory)
+  - name: DOTNET_SKIP_FIRST_TIME_EXPERIENCE
+    value: "true"
+  - name: NuGetVersion
+    value: 5.1.0
+  - name: Targets
+    value: Default
+
+jobs:
+  - job: GitVersion
+    pool:
+      vmImage: "windows-2019"
+    steps:
+      - template: gitversion/store.yml@rsg
+        parameters:
+          NuGetVersion: $(NuGetVersion)
+  - job: Nuke
+    pool:
+      vmImage: "windows-2019"
+    steps:
+      - template: gitversion/store.yml@rsg
+        parameters:
+          NuGetVersion: $(NuGetVersion)
+      - template: nuke/install.yml@rsg
+        parameters:
+          DotNetVersion: "2.2.300"
+          DotNet3Version: "3.0.100-preview6-012264"
+          NuGetVersion: $(NuGetVersion)
+      - template: nuke/run.yml@rsg
+        parameters:
+          Configuration: $(Configuration)
+          Verbosity: $(Verbosity)
+          Targets: $(Targets)
+
+  # - template: pipeline/nuke-job.yml@rsg
+  #   parameters:
+  #     name: 'Windows'
+  #     dependsOn: GitVersion
+  #     vmImage: "windows-2019"
+  #     Configuration: $(Configuration)
+  #     Verbosity: $(Verbosity)
+  #     GitHub: true
+  #     GitHubPackages: false
+  #     DotNetVersion: "2.2.300"
+  #     DotNet3Version: "3.0.100-preview6-012264"
+  #     NuGetVersion: "4.7.1"

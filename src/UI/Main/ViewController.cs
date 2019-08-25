@@ -10,14 +10,23 @@ using static AppKit.NSApplication;
 
 namespace UI
 {
+    /// <summary>
+    /// The view controller entry point.
+    /// </summary>
+    /// <seealso cref="UI.ViewControllerBase{UI.MainViewModel}" />
     public partial class ViewController : ViewControllerBase<MainViewModel>
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ViewController"/> class.
+        /// </summary>
+        /// <param name="handle">The pointer.</param>
         public ViewController(IntPtr handle)
             : base(handle)
         {
             ViewModel = new MainViewModel();
         }
 
+        /// <inheritdoc/>
         public override void PrepareForSegue(NSStoryboardSegue segue, NSObject sender)
         {
             base.PrepareForSegue(segue, sender);
@@ -32,6 +41,8 @@ namespace UI
                     break;
             }
         }
+
+        /// <inheritdoc/>
         protected override void ComposeObservables()
         {
             this.WhenAnyObservable(x => x.ViewModel.StartTimerCommand)
@@ -40,6 +51,7 @@ namespace UI
                 .DisposeWith(Bindings);
         }
 
+        /// <inheritdoc/>
         protected override void BindControls()
         {
             // TODO: See if Bind will work here
@@ -53,7 +65,7 @@ namespace UI
 
             this.OneWayBind(ViewModel, vm => vm.ButtonText, controller => controller.TimerButton.Title)
                 .DisposeWith(Bindings);
-            
+
             this.BindCommand(ViewModel, vm => vm.StartTimerCommand, controller => controller.TimerButton)
                 .DisposeWith(Bindings);
         }

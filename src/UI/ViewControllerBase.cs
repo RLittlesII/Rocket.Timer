@@ -11,16 +11,29 @@ using PropertyChangingEventHandler = ReactiveUI.PropertyChangingEventHandler;
 
 namespace UI
 {
+    /// <summary>
+    /// Base view controller.
+    /// </summary>
+    /// <typeparam name="T">The view model type.</typeparam>
+    /// <seealso cref="ReactiveUI.ReactiveViewController{T}" />
     public abstract class ViewControllerBase<T> : ReactiveViewController<T>
         where T : class
     {
-        protected CompositeDisposable Bindings { get; } = new CompositeDisposable();
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ViewControllerBase{T}"/> class.
+        /// </summary>
+        /// <param name="intPtr">The int PTR.</param>
         protected ViewControllerBase(IntPtr intPtr)
             : base(intPtr)
         {
         }
 
+        /// <summary>
+        /// Gets the bindings.
+        /// </summary>
+        protected CompositeDisposable Bindings { get; } = new CompositeDisposable();
+
+        /// <inheritdoc/>
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
@@ -28,21 +41,14 @@ namespace UI
             ComposeObservables();
         }
 
+        /// <summary>
+        /// Composes the observables.
+        /// </summary>
         protected abstract void ComposeObservables();
 
-        protected abstract void BindControls();
-    }
-
-    public abstract class ViewBase<T> : ReactiveView<T>
-        where T : class, IReactiveObject
-    {
-        protected CompositeDisposable Bindings { get; } = new CompositeDisposable();
-
-        protected ViewBase(IntPtr intPtr)
-            : base(intPtr)
-        {
-        }
-
+        /// <summary>
+        /// Binds the controls.
+        /// </summary>
         protected abstract void BindControls();
     }
 }

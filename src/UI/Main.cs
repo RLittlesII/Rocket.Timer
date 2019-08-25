@@ -1,10 +1,12 @@
-﻿using AppKit;
+﻿using System.Diagnostics.CodeAnalysis;
+using AppKit;
 
 namespace UI
 {
-    static class MainClass
+    [SuppressMessage("DocumentationRules", "SA1649", Justification = "Xamarin.Mac")]
+    internal static class MainClass
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             NSApplication.Init();
             NSApplication.Main(args);

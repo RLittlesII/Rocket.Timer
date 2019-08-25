@@ -14,6 +14,7 @@ namespace UI
             ButtonText = "Start";
         }
 
+        /// <inheritdoc/>
         public override string Id => "Rocket Timer";
 
         public string TimerValue
@@ -30,6 +31,7 @@ namespace UI
 
         public ReactiveCommand<Unit, Unit> StartTimerCommand { get; private set; }
 
+        /// <inheritdoc/>
         protected override void ComposeObservables()
         {
             StartTimerCommand = ReactiveCommand.Create(() =>

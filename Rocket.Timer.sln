@@ -1,7 +1,13 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29209.62
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "src\UI\UI.csproj", "{AE2E416F-0F82-48AD-A5C5-4108EE3BD9CB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = ".build", ".build\.build.csproj", "{9EA08549-3C31-48D0-8AEC-B93811F61C9B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{D50D506D-F50C-45DD-8310-5A9B6547A659}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,5 +19,16 @@ Global
 		{AE2E416F-0F82-48AD-A5C5-4108EE3BD9CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE2E416F-0F82-48AD-A5C5-4108EE3BD9CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE2E416F-0F82-48AD-A5C5-4108EE3BD9CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EA08549-3C31-48D0-8AEC-B93811F61C9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EA08549-3C31-48D0-8AEC-B93811F61C9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9EA08549-3C31-48D0-8AEC-B93811F61C9B} = {D50D506D-F50C-45DD-8310-5A9B6547A659}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {26EDE5CC-B778-49AB-A1A0-A8E719CBDD61}
 	EndGlobalSection
 EndGlobal

@@ -1,8 +1,15 @@
 ﻿using System;
+
 namespace UI
 {
-    public class Constants
+    /// <summary>
+    /// Constant values.
+    /// </summary>
+    public static class Constants
     {
-        public static string TimerModalSegue = nameof(TimerModalSegue);
+        /// <summary>
+        /// The timer modal segue.
+        /// </summary>
+        public const string TimerModalSegue = nameof(TimerModalSegue);
     }
 }
