@@ -48,6 +48,12 @@ namespace UI
                 .Subscribe(x => ViewModel.TimerValue = x)
                 .DisposeWith(Bindings);
 
+            this.OneWayBind(ViewModel, vm => vm.Id, controller => controller.Title)
+                .DisposeWith(Bindings);
+
+            this.OneWayBind(ViewModel, vm => vm.ButtonText, controller => controller.TimerButton.Title)
+                .DisposeWith(Bindings);
+            
             this.BindCommand(ViewModel, vm => vm.StartTimerCommand, controller => controller.TimerButton)
                 .DisposeWith(Bindings);
         }

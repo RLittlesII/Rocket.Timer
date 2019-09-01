@@ -15,23 +15,25 @@ namespace UI
         private string _dialogDescription;
         private string _dialogTitle;
         private string _timerValue;
+        private string _buttonText;
 
-        public string DialogDescription
+        public TimerModalViewModel()
         {
-            get => _dialogDescription;
-            set => this.RaiseAndSetIfChanged(ref _dialogDescription, value);
+            ButtonText = nameof(Dismiss);
         }
 
-        public string DialogTitle
-        {
-            get => _dialogTitle;
-            set => this.RaiseAndSetIfChanged(ref _dialogTitle, value);
-        }
+        public override string Id => "Timer";
 
         public string TimerValue
         {
             get => _timerValue;
             set => this.RaiseAndSetIfChanged(ref _timerValue, value);
+        }
+
+        public string ButtonText
+        {
+            get => _buttonText;
+            set => this.RaiseAndSetIfChanged(ref _buttonText, value);
         }
 
         public TimeSpan Timer => _timer.Value;
@@ -51,23 +53,26 @@ namespace UI
                     .ToProperty(this, x => x.Timer, TimeSpan.FromMinutes(Convert.ToDouble(TimerValue)))
                     .DisposeWith(ViewModelRegistrations);
 
-            timerObservable
-                .Where(x => x.Ticks == 0)
-                .Do(_ => this.Log().Debug("Ticks are Zero"))
+            var noTicks = timerObservable.Where(x => x.Ticks == 0).Do(_ => this.Log().Debug("Ticks are Zero"));
+            
+            noTicks
                 .Subscribe(_ =>
                 {
-                    var notification = new NSUserNotification();
+                    var notification = new NSUserNotification
+                    {
+                        Title = $"{TimerValue} minute(s) is up!",
+                        InformativeText = "Blast off!!!",
+                        DeliveryDate = (NSDate) DateTime.Now,
+                        SoundName = NSUserNotification.NSUserNotificationDefaultSoundName,
+                        HasActionButton = true
+                    };
 
-                    notification.Title = $"{TimerValue} minute(s) is up!";
-                    notification.InformativeText = "Blast off!!!";
-                    notification.DeliveryDate = (NSDate)DateTime.Now;
-                    notification.SoundName = NSUserNotification.NSUserNotificationDefaultSoundName;
-                    notification.HasActionButton = true;
-                    
                     // Make sure the notification fires even if the app is TopMost
                     NSUserNotificationCenter.DefaultUserNotificationCenter.ShouldPresentNotification = (c, n) => true;
                     
                     NSUserNotificationCenter.DefaultUserNotificationCenter.ScheduleNotification(notification);
+                    
+                    Dismiss.Execute().Subscribe();
                 })
                 .DisposeWith(ViewModelRegistrations);
 

@@ -1,5 +1,6 @@
 using System;
 using System.Reactive.Disposables;
+using System.Reactive.Linq;
 using Foundation;
 using ReactiveUI;
 
@@ -27,6 +28,12 @@ namespace UI
 
         protected override void BindControls()
         {
+            this.OneWayBind(ViewModel, vm => vm.Id, modal => modal.Title)
+                .DisposeWith(Bindings);
+
+            this.OneWayBind(ViewModel, vm => vm.ButtonText, modal => modal.DismissButton.Title)
+                .DisposeWith(Bindings);
+
             this.OneWayBind(ViewModel, vm => vm.Timer, view => view.TimerLabel.StringValue)
                 .DisposeWith(Bindings);
 
