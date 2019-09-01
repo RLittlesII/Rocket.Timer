@@ -15,7 +15,7 @@ namespace UI
 
         public ViewController Presenter { get; set; }
 
-        protected override void ComposeObservable()
+        protected override void ComposeObservables()
         {
             this.WhenAnyObservable(x => x.ViewModel.Dismiss)
                 .Subscribe(_ =>
@@ -33,7 +33,5 @@ namespace UI
             this.BindCommand(ViewModel, vm => vm.Dismiss, modal => modal.DismissButton)
                 .DisposeWith(Bindings);
         }
-
-        public event Action<object, object> DialogAccepted;
     }
 }

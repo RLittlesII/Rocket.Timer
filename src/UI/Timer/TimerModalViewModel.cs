@@ -3,6 +3,7 @@ using System.Reactive;
 using System.Reactive.Concurrency;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
+using Foundation;
 using ReactiveUI;
 using Splat;
 
@@ -53,10 +54,25 @@ namespace UI
             timerObservable
                 .Where(x => x.Ticks == 0)
                 .Do(_ => this.Log().Debug("Ticks are Zero"))
-                .Subscribe(_ => { })
+                .Subscribe(_ =>
+                {
+                    var notification = new NSUserNotification();
+
+                    notification.Title = $"{TimerValue} minute(s) is up!";
+                    notification.InformativeText = "Blast off!!!";
+                    notification.DeliveryDate = (NSDate)DateTime.Now;
+                    notification.SoundName = NSUserNotification.NSUserNotificationDefaultSoundName;
+                    notification.HasActionButton = true;
+                    
+                    // Make sure the notification fires even if the app is TopMost
+                    NSUserNotificationCenter.DefaultUserNotificationCenter.ShouldPresentNotification = (c, n) => true;
+                    
+                    NSUserNotificationCenter.DefaultUserNotificationCenter.ScheduleNotification(notification);
+                })
                 .DisposeWith(ViewModelRegistrations);
 
-            Dismiss = ReactiveCommand.Create(() => this.Log().Debug(nameof(Dismiss)));
+            Dismiss = ReactiveCommand.Create(() => this.Log().Debug(nameof(Dismiss)))
+                .DisposeWith(ViewModelRegistrations);
         }
     }
 }

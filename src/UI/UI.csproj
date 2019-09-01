@@ -91,15 +91,13 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="MainViewModel.cs" />
-    <Compile Include="ReactivePopover.cs" />
-    <Compile Include="Timer\TimerModal.cs" />
-    <Compile Include="Timer\TimerModalViewModel.cs" />
-    <Compile Include="Timer\TimerViewModel.cs" />
-    <Compile Include="ViewController.cs" />
-    <Compile Include="ViewController.designer.cs">
+    <Compile Include="Main\MainViewModel.cs" />
+    <Compile Include="Main\ViewController.cs" />
+    <Compile Include="Main\ViewController.designer.cs">
       <DependentUpon>ViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="Timer\TimerModal.cs" />
+    <Compile Include="Timer\TimerModalViewModel.cs" />
     <Compile Include="ViewControllerBase.cs" />
     <Compile Include="ViewModelBase.cs" />
     <Compile Include="Constants.cs" />

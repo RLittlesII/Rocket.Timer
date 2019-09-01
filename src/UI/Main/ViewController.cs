@@ -28,11 +28,11 @@ namespace UI
                 case "TimerModalSegue":
                     var dialog = segue.DestinationController as TimerModal;
                     dialog.Presenter = this;
-                    dialog.ViewModel.TimerValue = this.ViewModel.TimerValue;
+                    dialog.ViewModel.TimerValue = ViewModel.TimerValue;
                     break;
             }
         }
-        protected override void ComposeObservable()
+        protected override void ComposeObservables()
         {
             this.WhenAnyObservable(x => x.ViewModel.StartTimerCommand)
                 .Do(_ => this.Log().Debug(Constants.TimerModalSegue))
@@ -42,6 +42,7 @@ namespace UI
 
         protected override void BindControls()
         {
+            // TODO: See if Bind will work here
             this.WhenAnyValue(x => x.TimeEntryField.StringValue)
                 .Throttle(TimeSpan.FromSeconds(.35))
                 .Subscribe(x => ViewModel.TimerValue = x)

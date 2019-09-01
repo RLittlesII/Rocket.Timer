@@ -25,10 +25,10 @@ namespace UI
         {
             base.ViewDidLoad();
             BindControls();
-            ComposeObservable();
+            ComposeObservables();
         }
 
-        protected abstract void ComposeObservable();
+        protected abstract void ComposeObservables();
 
         protected abstract void BindControls();
     }
