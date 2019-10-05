@@ -34,7 +34,9 @@ variables:
   - name: NuGetVersion
     value: 5.1.0
   - name: Targets
-    value: Default
+    value: 
+  - name: CodeCovToken
+    value: '2bb65ebc-0490-4800-be74-bc19eec7443c'
 
 jobs:
   - job: GitVersion
