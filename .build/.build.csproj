@@ -11,7 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="GitVersion.CommandLine.DotNetCore" Version="5.0.1" />
-    <PackageReference Include="NuGet.CommandLine" Version="5.1.0" />
+    <PackageReference Include="NuGet.CommandLine" Version="5.2.1" />
     <PackageReference Include="Nuke.Common" Version="0.21.*" />
     <PackageReference Include="Rocket.Surgery.Nuke.Xamarin" Version="0.4.1" />
     <PackageReference Include="ReportGenerator" Version="4.2.15" />
